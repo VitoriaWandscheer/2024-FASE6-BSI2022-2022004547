@@ -1,11 +1,11 @@
 import express from 'express'
 import { connect } from './database'
 
-const port = 3333
+const port = 3000
 const app = express()
 
-app.use(express.json())
-app.use(express.static(__dirname + '/../public'))
+app.use(express.json()) //transforma arquivo json em um objeto
+app.use(express.static(__dirname + '/../public')) // Entrega os arquivos estáticos para o cliente
 
 app.get('/users', async (req, res) => {
   const db = await connect()
