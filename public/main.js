@@ -1,14 +1,16 @@
 const mainForm = document.querySelector('form')
 
 void async function () {
-  const response = await fetch('/users')
-  const users = await response.json()
+  const response = await fetch('/users') // Pede para o servidor buscar todos os registros da tabela users do banco de dados.
+  const users = await response.json() // Pega a resposta do servidor e monta essa resposta em um arquivo json.
+  // Abaixo, para cada registro no banco monta um novo formulário com os dados do usuário.
   users.forEach(user => {
     const newForm = mainForm.cloneNode(true)
     newForm.name.value = user.name
+    console.log(user.name);
     newForm.email.value = user.email
     newForm.dataset.id = user.id
-    newForm.id.readOnly = true
+    // newForm.id.readOnly = true
     mainForm.before(newForm)
   })
   console.log(users)
@@ -16,7 +18,7 @@ void async function () {
 
 document.addEventListener('submit', async (event) => {
   event.preventDefault()
-  const action = event.submitter.dataset.action ?? null
+  const action = event.submitter.dataset.action ?? null // submitter: pega o elemento clicado.
   const currentForm = event.target
   
   if (action === 'delete') {
@@ -38,12 +40,9 @@ document.addEventListener('submit', async (event) => {
     const name = currentForm.name.value
     const email = currentForm.email.value
     const body = JSON.stringify({ name, email })
-    const response = await fetch(url, { method, headers, body, })
+    const response = await fetch(url, { method, headers, body })
     if (!response.ok)
       return console.error('Error:', response.statusText)
-    const responseData = await response.json()
-    currentForm.name.value = responseData.name
-    currentForm.email.value = responseData.email
     return
   }
   
@@ -62,7 +61,7 @@ document.addEventListener('submit', async (event) => {
     newForm.name.value = responseData.name
     newForm.email.value = responseData.email
     newForm.dataset.id = responseData.id
-    newForm.id.readOnly = true
+    //newForm.id.readOnly = true
     mainForm.reset()
     mainForm.before(newForm)
     return
