@@ -13,7 +13,6 @@
 body {
   width: 100%;
   margin: 0;
-  padding: 1rem;
   background: linear-gradient(308deg, var(--color-primary) 0%, var(--color-secondary) 100%);
 }
 
@@ -22,7 +21,7 @@ body {
   margin-right: auto;
   margin-left: auto;
   max-width: 992px;
-  min-height: 100vh;
+  height: 100svh;
 }
 
 .body__content, .body__image-decoration {
@@ -115,15 +114,3 @@ form button[data-action=cancel] {
   margin-right: auto;
   padding-inline: .5rem;
 }
-
-/* form button[data-action=update] {
-  background-color: #007bff;
-}
-
-form button[data-action=delete] {
-  background-color: #dc3545;
-}
-
-form button[data-action=create] {
-  background-color: #28a745;
-} */

@@ -10,7 +10,6 @@ void async function () {
     console.log(user.name);
     newForm.email.value = user.email
     newForm.dataset.id = user.id
-    // newForm.id.readOnly = true
     mainForm.before(newForm)
   })
   console.log(users)
@@ -18,8 +17,8 @@ void async function () {
 
 document.addEventListener('submit', async (event) => {
   event.preventDefault()
-  const action = event.submitter.dataset.action ?? null // submitter: pega o elemento clicado.
-  const currentForm = event.target
+  const action = event.submitter.dataset.action ?? null // submitter: pega o elemento que gerou o evento.
+  const currentForm = event.target // target: pega o formulário do elemento que gerou o evento.
   
   if (action === 'delete') {
     const id = currentForm.dataset.id
@@ -61,7 +60,6 @@ document.addEventListener('submit', async (event) => {
     newForm.name.value = responseData.name
     newForm.email.value = responseData.email
     newForm.dataset.id = responseData.id
-    //newForm.id.readOnly = true
     mainForm.reset()
     mainForm.before(newForm)
     return
