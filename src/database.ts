@@ -1,5 +1,6 @@
-import { open, Database } from 'sqlite';
-import sqlite3 from 'sqlite3';
+import { open, Database } from 'sqlite'
+import sqlite3 from 'sqlite3'
+import bcrypt from 'bcrypt'
 
 let instance: Database | null = null;
 
