@@ -1,0 +1,33 @@
+* {
+    box-sizing: border-box;
+}
+  
+:root {
+  font-family: 'Roboto';
+  --color-primary: rgba(131,58,180,1);
+  --color-secondary: rgba(252,69,217,1);
+  --color-third: rgba(255,255,255,1);
+  --color-primary-light:  rgba(131,58,180,.4);
+  --navbar-height-desktop: 90px;
+}
+
+body {
+  width: 100%;
+  margin: 0;
+  background: linear-gradient(308deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  min-height: 100dvh;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-itemss: center;
+}
+
+.container {
+  display: flex;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 992px;
+  padding: 0 12px;
+}
