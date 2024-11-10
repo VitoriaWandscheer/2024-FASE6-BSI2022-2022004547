@@ -1,24 +1,28 @@
-const form = document.querySelector('form')
+const form = document.getElementById('login-form')
 
-form.addEventListener('submit', async (event) => {
+form?.addEventListener('submit', async (event) => {
     event.preventDefault()
     
     const response = await fetch('/token', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-        email: form.email.value,
-        password: form.password.value
-    })
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            email: form.email.value,
+            password: form.password.value
+        })
     })
 
-    const resposeData = await response.json()
+    const responseData = await response.json()
 
     if (!response.ok) {
-        alert("o servidor nos disse: " + resposeData.message)
+        alert("o servidor nos disse: " + responseData.message)
         return
     }
 
-    localStorage.setItem('token', resposeData.token)
+    localStorage.setItem('token', responseData.token)
+    localStorage.setItem('userName', responseData.userName)
+    localStorage.setItem('userEmail', responseData.userEmail)
+    localStorage.setItem('userId', responseData.userId)
+
     location.href = '/home.html'
 })

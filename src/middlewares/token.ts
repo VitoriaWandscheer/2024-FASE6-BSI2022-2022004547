@@ -8,7 +8,7 @@ export const createToken: RequestHandler = async (req, res) => {
     const db = await connect()
     const { email, password } = req.body
 
-    const user = await db.get('SELECT id, email, password FROM users WHERE email = ? LIMIT 1', [email])
+    const user = await db.get('SELECT id, name, email, password FROM users WHERE email = ? LIMIT 1', [email])
 
     if (!user)
         return res.status(401).json({ 'message': 'Invalid email' })
@@ -19,8 +19,11 @@ export const createToken: RequestHandler = async (req, res) => {
         return res.status(401).json({ 'message': 'Invalid password' })
     
     delete user.password
+    const userName = user.name
+    const userEmail = user.email
+    const userId = user.id
     const token = await sign(user)
-    res.json({ token })
+    res.json({ token, userName, userEmail, userId })
 }
 
 export const verifyToken: RequestHandler = async (req, res, next) => {

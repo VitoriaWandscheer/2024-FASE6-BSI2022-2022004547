@@ -1,0 +1,14 @@
+.body__content {
+    width: 100%;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table td, table th {
+    border-bottom: 1px solid var(--color-primary);
+    padding: 7px 24px 7px 3px;
+    text-align: start;
+}

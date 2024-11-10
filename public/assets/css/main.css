@@ -9,6 +9,7 @@
   --color-third: rgba(255,255,255,1);
   --color-primary-light:  rgba(131,58,180,.4);
   --navbar-height-desktop: 90px;
+  -moz-autofill-background: var(--color-third)
 }
 
 body {
@@ -21,7 +22,7 @@ body {
 main {
   display: flex;
   flex-direction: column;
-  align-itemss: center;
+  align-items: center;
 }
 
 .container {

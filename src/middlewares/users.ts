@@ -1,5 +1,6 @@
 import { connect } from '../database'
 import { RequestHandler } from 'express'
+import bcrypt from 'bcrypt'
 
 const getManyUsers: RequestHandler = async (req, res) => {
     const db = await connect() // Estabelece a conexão com o BD.
@@ -9,18 +10,19 @@ const getManyUsers: RequestHandler = async (req, res) => {
 
 const createUser: RequestHandler = async (req, res) => {
     const db = await connect()
-    const { name, email } = req.body
-    const result = await db.run('INSERT INTO users (name, email) VALUES (?, ?)', [name, email])
+    const { name, email, password } = req.body
+    const newPassword = await bcrypt.hash(password, 10)
+    const result = await db.run('INSERT INTO users (name, email, password) VALUES (?, ?, ?)', [name, email, newPassword])
     const user = await db.get('SELECT * FROM users WHERE id = ?', [result.lastID])
     res.json(user)
 }
 
-
 const updateUser: RequestHandler = async (req, res) => {
   const db = await connect()
-  const { name, email } = req.body
+  const { name, email, password } = req.body
+  const newPassword = await bcrypt.hash(password, 10)
   const { id } = req.params
-  await db.run('UPDATE users SET name = ?, email = ? WHERE id = ?', [name, email, id])
+  await db.run('UPDATE users SET name = ?, email = ?, password = ? WHERE id = ?', [name, email, newPassword, id])
   const user = await db.get('SELECT * FROM users WHERE id = ?', [id])
   res.json(user)
 }
